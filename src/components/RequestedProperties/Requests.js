@@ -14,13 +14,12 @@ const Requests = (props) => {
        console.log(statedata);
     let requestProperties = [];
         statedata.map((eachprops) => {
-   console.log(recivedData[eachprops].userEmail===props.email&& recivedData[eachprops].requested === true)
-           if(recivedData[eachprops].userEmail == props.email && recivedData[eachprops].requested === true) 
+   console.log(recivedData[eachprops].userEmail===props.email&& recivedData[eachprops].requested === true )
+           if(recivedData[eachprops].userEmail == props.email && recivedData[eachprops].requested === true&& recivedData[eachprops].accepted === false) 
            {
 
             requestProperties.push({
-                requester : recivedData[eachprops].requestedEmail ,
-                 propertyId : recivedData[eachprops].propertyId
+               ...recivedData[eachprops]
             })
            }
 
@@ -35,12 +34,26 @@ const Requests = (props) => {
      } , [])
 
 
-     const requestedPropsArray = requestedProps.map((eachprops) => {
+     const requestAccepthandler = (i) => {
+         let state = [...requestedProps];
+          console.log(i)
+          console.log(state)
+         const acceptedObject = {...state[i]};
+        console.log(state[i])
+          acceptedObject.accepted = true;
+        state[i] = acceptedObject;
+         console.log(acceptedObject);
+        setRequestedProps(state);
+        axios.put('https://landregistration.firebaseio.com/properties/' + acceptedObject.propertyId  + ".json", acceptedObject )
+        .then((response) => console.log(response.data))
+     }
+
+     const requestedPropsArray = requestedProps.map((eachprops , i) => {
 
         return (<div>
-            <h1>{eachprops.requester}</h1>
+            <h1>{eachprops.requestedEmail}</h1>
             <p>wantss to buy your property</p>
-            <button>Accept</button><button>Decline</button>
+            <button onClick = {() => requestAccepthandler(i)}>Accept</button><button>Decline</button>
         </div>)
      })
     return(

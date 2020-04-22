@@ -8,7 +8,7 @@ class Layout extends Component {
 
         return(
             <div className = {classes.Layout}>
-                <NavBar />
+                <NavBar email = {this.props.email} />
                 <div className = {classes.Container}>
                 {this.props.children}
                 </div>

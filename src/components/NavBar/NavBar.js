@@ -7,19 +7,35 @@ class NavBar extends Component {
 
     render() {
 
-        return(
-           <header className = {classes.NavBar}>
-               <div className = {classes.Logo}>
-                   {/* <Logo /> */}
-               </div>
-               <div className = {classes.Navlink}>
-               <NavLinks  exact link = '/'>Home </NavLinks>
-                <NavLinks link = '/RegisterForm'>RegisterForm</NavLinks>
-                <NavLinks link = '/Login'>Login</NavLinks>
-                <NavLinks link = '/Buy'>Buy Properties</NavLinks>
-               </div>
-              
-           </header>
+        let links = (
+            <div  className={classes.Navlink}  >
+                <NavLinks exact link='/'>Home </NavLinks>
+                <NavLinks link='/RegisterForm'>RegisterForm</NavLinks>
+                <NavLinks link='/Login'>Login</NavLinks>
+                <NavLinks link='/Buy'>Buy Properties</NavLinks>
+                <NavLinks link='/requests'>Properties Request</NavLinks>
+            </div>
+
+        )
+        if (this.props.email == "admin") {
+            links = (
+                <div className={classes.Navlink} >
+                    <NavLinks link='/Login'>Login</NavLinks>
+                    <NavLinks link='/validate' >Validate properties</NavLinks>
+                </div>
+
+            )
+        }
+        return (
+            <header className={classes.NavBar}>
+                <div className={classes.Logo}>
+                    {/* <Logo /> */}
+                </div>
+               
+                        {links}
+            
+
+            </header>
         )
     }
 }

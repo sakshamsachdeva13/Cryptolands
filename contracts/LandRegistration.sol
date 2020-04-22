@@ -26,12 +26,14 @@ contract landRegistration {
     struct profiles {
         uint256[] assetList;
     }
-
+    struct props {
+        uint256[] bull;
+    }
     mapping(uint256 => landDetails) land;
     address owner;
     mapping(string => address) superAdmin;
     mapping(address => profiles) profile;
-
+    mapping(uint256 => props ) properties;
     //contract owner
     constructor() public {
         owner = msg.sender;
@@ -160,19 +162,17 @@ contract landRegistration {
 
     //buying the approved property
     function buyProperty(uint256 property) public payable {
-        require(land[property].requestStatus == reqStatus.approved);
-        require(
-            msg.value >=
-                (land[property].marketValue +
-                    ((land[property].marketValue) / 10))
-        );
-        land[property].CurrentOwner.transfer(land[property].marketValue);
-        removeOwnership(land[property].CurrentOwner, property);
-        land[property].CurrentOwner = msg.sender;
-        land[property].isAvailable = false;
-        land[property].requester = address(0);
-        land[property].requestStatus = reqStatus.Default;
-        profile[msg.sender].assetList.push(property); //adds the property to the asset list of the new owner.
+         
+         uint256 prop = property;
+         prop+=10;
+        
+        // land[property].CurrentOwner.transfer(land[property].marketValue);
+        // removeOwnership(land[property].CurrentOwner, property);
+        // land[property].CurrentOwner = msg.sender;
+        // land[property].isAvailable = false;
+        // land[property].requester = address(0);
+        // land[property].requestStatus = reqStatus.Default;
+        // profile[msg.sender].assetList.push(property); //adds the property to the asset list of the new owner.
     }
 
     //removing the ownership of seller for the land. and it is called by the buyProperty function
