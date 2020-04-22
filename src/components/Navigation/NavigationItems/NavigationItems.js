@@ -8,6 +8,8 @@ const NavigationItems = (props) => {
                     <NavigationItem link = "/RegisterForm">RegisterForm</NavigationItem>
                     <NavigationItem  link = "/landinfo">landinfo</NavigationItem>
                     <NavigationItem link = "/">Home</NavigationItem>
+                    <NavigationItem link = '/myproperties'>My Properties</NavigationItem>
+                    <NavigationItem link = '/buyproperties'>Explore</NavigationItem>
                 </div>
     )
 

@@ -15,6 +15,10 @@ contract landRegistration {
         reqStatus requestStatus;
     }
 
+ event LandRegistered (
+   uint id ,
+   uint256 _surveynumber
+ );
     //request status
     enum reqStatus {Default, pending, reject, approved}
 
@@ -60,7 +64,8 @@ contract landRegistration {
         land[id].surveyNumber = _surveyNumber;
         land[id].CurrentOwner = _OwnerAddress;
         land[id].marketValue = _marketValue;
-        profile[_OwnerAddress].assetList.push(id);
+        profile[_OwnerAddress].assetList.push(id); 
+        // emit LandRegistered(id , _surveyNumber);
         return true;
     }
 
